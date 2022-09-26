@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="age" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DeptAdds" Relationship="Self.FK__DeptAdd__DeptEmp__5535A963" FromRole="Dept" ToRole="DeptAdd" />
+    <NavigationProperty Name="DeptSals" Relationship="Self.FK__DeptSal__DeptEmp__52593CB8" FromRole="Dept" ToRole="DeptSal" />
+  </EntityType>
+  <EntityType Name="DeptAdd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="Int32" />
+    <Property Name="DeptEmpId" Type="Int32" />
+    <NavigationProperty Name="Dept" Relationship="Self.FK__DeptAdd__DeptEmp__5535A963" FromRole="DeptAdd" ToRole="Dept" />
+  </EntityType>
+  <EntityType Name="DeptSal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="sal" Type="Int32" />
+    <Property Name="dept" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DeptEmpId" Type="Int32" />
+    <NavigationProperty Name="Dept1" Relationship="Self.FK__DeptSal__DeptEmp__52593CB8" FromRole="DeptSal" ToRole="Dept" />
+  </EntityType>
+  <EntityType Name="Emp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__DeptAdd__DeptEmp__5535A963">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="DeptAdd" Type="Self.DeptAdd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeptAdd">
+        <PropertyRef Name="DeptEmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeptSal__DeptEmp__52593CB8">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="DeptSal" Type="Self.DeptSal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeptSal">
+        <PropertyRef Name="DeptEmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Depts" EntityType="Self.Dept" />
+    <EntitySet Name="DeptAdds" EntityType="Self.DeptAdd" />
+    <EntitySet Name="DeptSals" EntityType="Self.DeptSal" />
+    <EntitySet Name="Emps" EntityType="Self.Emp" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <AssociationSet Name="FK__DeptAdd__DeptEmp__5535A963" Association="Self.FK__DeptAdd__DeptEmp__5535A963">
+      <End Role="Dept" EntitySet="Depts" />
+      <End Role="DeptAdd" EntitySet="DeptAdds" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeptSal__DeptEmp__52593CB8" Association="Self.FK__DeptSal__DeptEmp__52593CB8">
+      <End Role="Dept" EntitySet="Depts" />
+      <End Role="DeptSal" EntitySet="DeptSals" />
+    </AssociationSet>
+    <FunctionImport Name="GetAlldeptData" ReturnType="Collection(MyProjectModel.GetAlldeptData_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetAlldeptData_Result">
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="age" Nullable="true" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="sal" Nullable="true" />
+    <Property Type="String" Name="dept" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="address" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="zipcode" Nullable="true" />
+  </ComplexType>
+</Schema>

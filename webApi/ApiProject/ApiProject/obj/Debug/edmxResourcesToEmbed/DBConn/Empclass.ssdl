@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" />
+    <Property Name="age" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="DeptAdd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="30" />
+    <Property Name="zipcode" Type="int" />
+    <Property Name="DeptEmpId" Type="int" />
+  </EntityType>
+  <EntityType Name="DeptSal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="sal" Type="int" />
+    <Property Name="dept" Type="varchar" MaxLength="30" />
+    <Property Name="DeptEmpId" Type="int" />
+  </EntityType>
+  <EntityType Name="Emp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Dept" Type="varchar" MaxLength="50" />
+    <Property Name="Salary" Type="int" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__DeptAdd__DeptEmp__5535A963">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="DeptAdd" Type="Self.DeptAdd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeptAdd">
+        <PropertyRef Name="DeptEmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DeptSal__DeptEmp__52593CB8">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="DeptSal" Type="Self.DeptSal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DeptSal">
+        <PropertyRef Name="DeptEmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetAlldeptData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="MyProjectModelStoreContainer">
+    <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeptAdd" EntityType="Self.DeptAdd" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeptSal" EntityType="Self.DeptSal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emp" EntityType="Self.Emp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__DeptAdd__DeptEmp__5535A963" Association="Self.FK__DeptAdd__DeptEmp__5535A963">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="DeptAdd" EntitySet="DeptAdd" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DeptSal__DeptEmp__52593CB8" Association="Self.FK__DeptSal__DeptEmp__52593CB8">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="DeptSal" EntitySet="DeptSal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,14 +1,21 @@
-﻿@model Project1.Models.Products
+﻿@model Project1.Models.Product
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
+
+@*dl-Data List
+  dt-Data Term
+  dd-Data definition*@
+
+
 <dl>
     <dt>Product Id</dt>
-    <dd>@Model.ProductId</dd>
     <dt>Name</dt>
-    <dd>@Model.Name</dd>
     <dt>Price</dt>
+    <dd>@Model.ProductId</dd>
+    <dd>@Model.Name</dd>
     <dd>@Model.Price</dd>
 </dl>
+

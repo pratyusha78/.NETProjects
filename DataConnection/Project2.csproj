@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7FF049C6-638D-401A-9D41-F81B21370628}</ProjectGuid>
+    <ProjectGuid>{79DE83B0-8234-4218-B81A-27689DC14A42}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project1</RootNamespace>
-    <AssemblyName>Project1</AssemblyName>
+    <RootNamespace>Project2</RootNamespace>
+    <AssemblyName>Project2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,13 +129,34 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CrudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Dbconn\Emp.cs">
+      <DependentUpon>table1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dbconn\Login.cs">
+      <DependentUpon>table1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dbconn\table1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>table1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dbconn\table1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>table1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dbconn\table1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>table1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Products.cs" />
-    <Compile Include="Models\ProductsData.cs" />
+    <Compile Include="Models\EmpClass.cs" />
+    <Compile Include="Models\LoginClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +164,29 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Dbconn\table1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>table1.edmx</DependentUpon>
+      <LastGenOutput>table1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Dbconn\table1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>table1.edmx</DependentUpon>
+      <LastGenOutput>table1.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Dbconn\table1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>table1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Dbconn\table1.edmx.diagram">
+      <DependentUpon>table1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -172,7 +212,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Crud\Index.cshtml" />
+    <Content Include="Views\Crud\Add.cshtml" />
+    <Content Include="Views\Crud\Login.cshtml" />
+    <Content Include="Views\Crud\SignUp.cshtml" />
+    <Content Include="Views\Crud\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -190,6 +234,9 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -206,9 +253,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62529</DevelopmentServerPort>
+          <DevelopmentServerPort>51586</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62529/</IISUrl>
+          <IISUrl>http://localhost:51586/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

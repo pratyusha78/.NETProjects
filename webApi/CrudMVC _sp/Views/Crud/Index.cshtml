@@ -1,0 +1,44 @@
+﻿@model List<Project2.Models.EmpClass>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<td><a href="@Url.Action("Add","Crud")" class="btn btn-success">Create</a></td>
+
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Company</th>
+        <th>Dept</th>
+        <th>Salary</th>
+        <th>Delete</th>
+        <th>Edit</th>
+
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.id</td>
+            <td>@items.Name</td>
+            <td>@items.Email</td>
+            <td>@items.Mobile</td>
+            <td>@items.Company</td>
+            <td>@items.Dept</td>
+            <td>@items.Salary</td>
+            <td><a href="@Url.Action("Delete","Crud",new { items.id })" class="btn btn-danger">Del</a></td>
+            <td><a href="@Url.Action("Edit","Crud",new { items.id })" class="btn btn-primary">Update</a></td>
+
+
+        </tr>
+
+    }
+
+</table>
+
+

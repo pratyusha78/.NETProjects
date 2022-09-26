@@ -1,0 +1,39 @@
+﻿@model List<Project2.Models.GetAllDataModel>
+@{
+    ViewBag.Title = "EmpAllDetails";
+}
+
+<h2>EmpAllDetails</h2>
+
+<:td><a href="@Url.Action("Add","Crud")" class="btn btn-success">Create</a></:td>
+
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>age</th>
+        <th>Dept</th>
+        <th>Salary</th>
+        <th>Address</th>
+        <th>Zipcode</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            
+            <td>@items.Name</td>
+            <td>@items.email</td>
+            <td>@items.age</td>
+            <td>@items.dept</td>
+            <td>@items.sal</td>
+            <td>@items.address</td>
+            <td>@items.zipcode</td>
+           
+        </tr>
+
+    }
+
+</table>
+
+

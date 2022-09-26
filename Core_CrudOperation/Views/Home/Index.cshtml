@@ -1,0 +1,42 @@
+﻿@model List<Project1_Core.Models.Employee>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>age</th>
+        <th>Email</th>
+        <th>Sal</th>
+        <th>dept</th>
+        <th>address</th>
+        <th>zipcode</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.age</td>
+            <td>@item.email</td>
+            <td>@item.sal</td>
+            <td>@item.dept</td>
+            <td>@item.address</td>
+            <td>@item.zipcode</td>
+            <td><a class="btn btn-warning" href="@Url.Action("Edit","Home", new {item.Id })">Edit(MVC)</a></td>
+            <td><a class="btn btn-danger" href="@Url.Action("Delete","Home", new {item.Id })">Delete(MVC)</a></td>
+            <td><a class="btn btn-warning" asp-action="Edit" asp-controller="Home" asp-route-Id="@item.Id">Edit(Core)</a></td>
+
+            <td><a class="btn btn-danger" asp-action="Delete" asp-controller="Home" asp-route-Id="@item.Id">Delete(Core)</a></td>
+
+        </tr>
+    }
+
+
+
+</table>
